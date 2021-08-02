@@ -22,4 +22,12 @@
         android:textColor="@color/black"
         android:textSize="20sp" />
 
+    <EditText
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/edit_text_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

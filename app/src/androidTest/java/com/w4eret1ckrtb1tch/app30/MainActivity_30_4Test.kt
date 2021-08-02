@@ -1,6 +1,8 @@
 package com.w4eret1ckrtb1tch.app30
 
 import android.view.View
+import android.widget.CheckBox
+import android.widget.EditText
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
@@ -51,7 +53,40 @@ class MainActivity_30_4Test {
     }
 
 
-    //Создаем метод, который возвращает объект ViewAction
+    @Test
+    fun recyclerViewItemFieldEditText() {
+
+        for (position in 0..8) {
+
+            Espresso.onView(ViewMatchers.withId(R.id.recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerAdapter.ItemViewHolder>(
+                    position,
+                    editItemWithId(R.id.edit_text_item)
+                )
+            )
+        }
+    }
+
+    //Ввод данных в поле
+    private fun editItemWithId(id: Int): ViewAction {
+        return object : ViewAction {
+            override fun getConstraints(): Matcher<View> {
+                return Matchers.any(View::class.java)
+            }
+
+            override fun getDescription(): String {
+                return "Edit text field view with specified id"
+            }
+
+            override fun perform(uiController: UiController?, view: View?) {
+                val v = view?.findViewById(id) as EditText
+                v.setText("Hello world!!!")
+            }
+
+        }
+    }
+
+    //Создаем метод, который возвращает объект ViewAction - клик по CheckBox
     private fun clickItemWithId(id: Int): ViewAction {
         //Создаем анонимный класс, реализующий интерфейс ViewAction
         return object : ViewAction {
@@ -68,7 +103,7 @@ class MainActivity_30_4Test {
 
             //В этом методе совершаем действие над View
             override fun perform(uiController: UiController, view: View) {
-                val v = view.findViewById<View>(id) as View
+                val v = view.findViewById(id) as CheckBox
                 v.performClick()
             }
         }
