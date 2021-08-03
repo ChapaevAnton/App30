@@ -2,7 +2,7 @@ package com.w4eret1ckrtb1tch.app30
 
 import android.view.View
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -36,11 +36,11 @@ class MainActivityTest {
     @Test
     fun checkIfButtonIsActivatedWhenEnteringText() {
 
-        Espresso.onView(edit).perform(typeText("Hello world!!!"))
-        closeSoftKeyboard()
+        Espresso.onView(edit).perform(ViewActions.typeText("Hello world!!!"))
+        ViewActions.closeSoftKeyboard()
         Espresso.onView(button).check(ViewAssertions.matches(ViewMatchers.isEnabled()))
-        Espresso.onView(button).perform(click())
-        Espresso.onView(edit).perform(clearText())
+        Espresso.onView(button).perform(ViewActions.click())
+        Espresso.onView(edit).perform(ViewActions.clearText())
         Espresso.onView(button).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isEnabled())))
     }
 }
